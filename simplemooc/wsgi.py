@@ -15,7 +15,7 @@ from whitenoise.django import DjangoWhiteNoise
 
 
 
-#os.environ.setdefault("DJANGO_SETTINGS_MODULE", "simplemooc.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "simplemooc.settings")
 
 application = get_wsgi_application()
 
