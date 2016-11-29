@@ -2,5 +2,6 @@ vwin
 .idea
 *.sqlite3
 *.venv
+venv
 __pycache__
 staticfiles
