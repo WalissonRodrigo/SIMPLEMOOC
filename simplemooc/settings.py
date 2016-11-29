@@ -86,18 +86,21 @@ WSGI_APPLICATION = 'simplemooc.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
+import dj_database_url
+
 DATABASES = {
     'default': {
-         'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-            'NAME': 'simplemooc',                      # Or path to database file if using sqlite3.
-            # The following settings are not used with sqlite3:
+         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'simplemooc',
             'USER': 'simple',
             'PASSWORD': 'simple123',
-            'HOST': 'localhost',                      # Empty for localhost through domain sockets or           '127.0.0.1' for localhost through TCP.
-            'PORT': '',                      # Set to empty string for default.
+            'HOST': 'localhost',
+            'PORT': '',
     }
 }
 
+db_from_env = dj_database_url.config()
+DATABASES['default'].update(db_from_env)
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
