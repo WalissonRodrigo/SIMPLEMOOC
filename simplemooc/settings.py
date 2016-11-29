@@ -14,7 +14,6 @@ import os
 from decouple import config
 import dj_database_url
 
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -78,15 +77,12 @@ TEMPLATES = [
         },
     },
 ]
-#BOOTSTRAP_ADMIN_SIDEBAR_MENU = True
 
 WSGI_APPLICATION = 'simplemooc.wsgi.application'
 
 
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
-
-import dj_database_url
 
 DATABASES = {
     'default': {
@@ -151,6 +147,8 @@ STATICFILES_DIRS = (
     os.path.join(PROJECT_ROOT, 'simplemooc','media'),
 )
 
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+
 #envio de emails
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 #EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
@@ -168,15 +166,6 @@ LOGIN_REDIRECT_URL = 'core:home'
 LOGOUT_URL = 'accounts:logout'
 AUTH_USER_MODEL = 'accounts.User'
 
-# Heroku settings
-
-db_from_env = dj_database_url.config()
-DATABASES['default'].update(db_from_env)
-
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-
-# Allow all host headers
-ALLOWED_HOSTS = ['*']
-
