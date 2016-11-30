@@ -31,7 +31,6 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 # Application definition
 
 INSTALLED_APPS = [
-    #'bootstrap_admin',
 	'jet',
 	'jet.dashboard',
     'django.contrib.admin',
@@ -94,7 +93,6 @@ DATABASES = {
             'PORT': '',
     }
 }
-
 db_from_env = dj_database_url.config()
 DATABASES['default'].update(db_from_env)
 
@@ -138,13 +136,13 @@ USE_TZ = True
 
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
 STATIC_URL = '/static/'
-MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'simplemooc','media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'simplemooc','media')
 MEDIA_URL = '/media/'
 
 # Extra places for collectstatic to find static files.
 STATICFILES_DIRS = (
     os.path.join(PROJECT_ROOT, 'static'),
-    os.path.join(PROJECT_ROOT, 'simplemooc','media'),
+    os.path.join(BASE_DIR, 'simplemooc','media'),
 )
 
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
@@ -168,6 +166,7 @@ AUTH_USER_MODEL = 'accounts.User'
 
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
+SECURE_SSL_REDIRECT = True
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 ALLOWED_HOSTS = ['*']
