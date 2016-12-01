@@ -15,7 +15,7 @@ def dashboard(request):
 
 
 def register(request):
-    template_name = 'accounts/password_reset.html'
+    template_name = 'accounts/register.html'
     if request.method == 'POST':
         form = RegisterForm(request.POST)
         if form.is_valid():
@@ -39,12 +39,19 @@ def password_reset(request):
     context = {}
     form = PasswordResetForm(request.POST or None)
     if form.is_valid():
-        user = User.objects.get(email=form.cleaned_data['email'])
-        key = user.username
-        reset = PasswordReset(key=key, user=key)
-        reset.save()
+        form.save()
         context['success'] = True
+    context['form'] = form
+    return render(request, template_name, context)
 
+def password_reset_confirm(request, key):
+    template_name = 'accounts/password_reset_confirm.html'
+    context = {}
+    reset = get_object_or_404(PasswordReset, key=key)
+    form = SetPasswordForm(user=reset.user, data=request.POST or None)
+    if form.is_valid():
+        form.save()
+        context['success'] = True
     context['form'] = form
     return render(request, template_name, context)
 

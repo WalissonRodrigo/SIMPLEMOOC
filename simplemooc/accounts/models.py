@@ -45,7 +45,7 @@ class PasswordReset(models.Model):
         settings.AUTH_USER_MODEL, verbose_name='Usuário',
         related_name='resets'
     )
-    key = models.CharField('Chave', max_length=100, unique=True)
+    key = models.CharField('Chave', max_length=100)
     created_at = models.DateTimeField('Criado em', auto_now_add=True)
     confirmed = models.BooleanField('Confirmado?', default=False, blank=True)
 
